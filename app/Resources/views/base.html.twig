@@ -10,10 +10,82 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="PROJECT" src="...">
+                </a>
+            </div>
+            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal"
+                    data-target="#myModal">Sing in</button>
+        </div>
+    </nav>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sing in</h4>
+                </div>
+                <form class="form-horizontal" action="/user/login" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-offset-2 col-sm-2 control-label">Email</label>
+                            <div class="col-sm-5">
+                                <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-offset-2 col-sm-2 control-label">Password</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" name="password" id="inputPassword3"
+                                       placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember-me"> Remember me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="checkbox">
+                                    <a href="/register">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
         {% block javascripts %}
             <script src="{{ asset('js/jquery.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         {% endblock %}
     </body>
+    <div class="footer">
+        <div class="navbar navbar-default navbar-fixed-bottom row-fluid">
+            <div class="container-fluid">
+                <div class="well well-sm">
+                    <p>
+                    <div>&copy; 2017 <a href="/">PROJECT</a> - Все права защищены</div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

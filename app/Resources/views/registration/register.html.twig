@@ -1,11 +1,18 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+{% form_theme form ':Form:bootstrap_3_cool.html.twig' %}
 
-<button type="submit">Register!</button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+{% block content %}
+
+            {{ form_start(form, {'attr': {class:'form-horizontal'}}) }}
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword.first) }}
+            {{ form_row(form.plainPassword.second) }}
+<div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Register!</button>
+</div>
+
+            {{ form_end(form) }}
+
+
 {% endblock %}
