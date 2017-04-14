@@ -33,6 +33,10 @@ class User implements UserInterface
      * @Assert\NotBlank()
      */
     private $username;
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $role;
 
     /**
      * @Assert\NotBlank()
@@ -96,13 +100,23 @@ class User implements UserInterface
         // You *may* need a real salt if you choose a different encoder.
         return null;
     }
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role = null)
+    {
+        $this->role = $role;
+    }
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return [$this->getRole()];
     }
 
     public function eraseCredentials()
     {
+        return null;
     }
 }

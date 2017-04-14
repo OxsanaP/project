@@ -17,8 +17,21 @@
                     <img alt="PROJECT" src="...">
                 </a>
             </div>
-            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal"
-                    data-target="#myModal">Sing in</button>
+            <p class="navbar-text navbar-right">
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            Signed in: {{ app.user.username }}
+                    <br>
+                    <a class="navbar-link" href="/logout">Log out</a>
+
+            {% else %}
+                <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal"
+                        data-target="#myModal">Sing in</button>
+            {% endif %}
+            </p>
+
+
+
         </div>
     </nav>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
