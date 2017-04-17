@@ -45,9 +45,6 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * The below length depends on the "algorithm" you use for encoding
-     * the password, but this works well with bcrypt.
-     *
      * @ORM\Column(type="string", length=64)
      */
     private $password;
@@ -97,9 +94,9 @@ class User implements UserInterface
     public function getSalt()
     {
         // The bcrypt algorithm doesn't require a separate salt.
-        // You *may* need a real salt if you choose a different encoder.
         return null;
     }
+
     public function getRole()
     {
         return $this->role;
