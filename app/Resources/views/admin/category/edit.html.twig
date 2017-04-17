@@ -1,0 +1,48 @@
+{% form_theme edit_form ':Form:bootstrap_3_cool.html.twig' %}
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Edit Category</h2>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="container-fluid">
+
+                            <hr/>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="widget-box">
+                                        <div class="widget-content nopadding">
+                                            {{ form_start(edit_form) }}
+                                            {{ form_widget(edit_form) }}
+                                            <div class="form-group">
+                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-1">
+                                                    <button type="submit" class="btn btn-round btn-success btn-sm">Edit</button>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="{{ path('admin_category_index') }}">
+                                                        <button type="button" class="btn btn-round btn-info btn-sm">Back</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {{ form_end(edit_form) }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
