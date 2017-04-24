@@ -37,9 +37,6 @@ class ConsumptionCategoryController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             5/*limit per page*/
         );
-
-
-
         $consumptionCategories = $em->getRepository('AppBundle:ConsumptionCategory')->findAll();
 
         return $this->render('admin/category/index.html.twig', array(
@@ -63,6 +60,7 @@ class ConsumptionCategoryController extends Controller
             try {
                 if ($form->isValid()) {
                     $em = $this->getDoctrine()->getManager();
+                    $this->_setParentCategory($consumptionCategory, $form);
                     $em->persist($consumptionCategory);
                     $em->flush();
 
@@ -107,6 +105,7 @@ class ConsumptionCategoryController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             try{
+                $this->_setParentCategory($consumptionCategory, $editForm);
                 $this->getDoctrine()->getManager()->flush();
             } catch (\Exception $e) {
                 $this->addFlash(
@@ -171,6 +170,22 @@ class ConsumptionCategoryController extends Controller
             "The category {$name} has deleted."
         );
         return $this->redirectToRoute('admin_category_index');
+    }
+
+    /**
+     * Set parent category from form extra data
+     * @param ConsumptionCategory $consumptionCategory
+     * @param $form
+     * @return $this
+     */
+    public function _setParentCategory(ConsumptionCategory $consumptionCategory, $form)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $form->getExtraData();
+        $id = (isset($data['parent_category'])) ? (int)$data['parent_category'] : null;
+        $parentCategory = $em->getRepository('AppBundle:ConsumptionCategory')->find($id);
+        $consumptionCategory->setParentCategory($parentCategory);
+        return $this;
     }
 
     /**

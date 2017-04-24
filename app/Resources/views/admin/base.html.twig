@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/custom.css') }}">
     {% endblock %}
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    {#<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>#}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body class="nav-md">
@@ -33,6 +33,18 @@
                                 <ul class="nav child_menu">
                                     <li><a href="{{ path('admin_category_index') }}">View</a></li>
                                     <li><a href="{{ path('admin_category_new') }}">Add</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-home"></i> Consumption <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ path('admin_consumption_index') }}">View</a></li>
+                                    <li><a href="{{ path('admin_consumption_new') }}">Add</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-home"></i> Income Type <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="{{ path('admin_incometype_index') }}">View</a></li>
+                                    <li><a href="{{ path('admin_incometype_new') }}">Add</a></li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>

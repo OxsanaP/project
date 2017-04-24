@@ -2,7 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
  * Consumption
@@ -23,18 +27,25 @@ class Consumption
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",options={"default":0})
      */
-    private $is_user;
+    private $is_user = 0;
 
-    private $category_id;
+    /**
+     * @ORM\ManyToOne(targetEntity="ConsumptionCategory", inversedBy="consumption")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @Assert\NotBlank()
+     */
+    private $category;
 
     /**
      * @var \DateTime $created
+     *
      * @ORM\Column(type="datetime")
      */
     private $created;
@@ -47,25 +58,30 @@ class Consumption
     private $updated;
 
     /**
-     * @ORM\ManyToOne(
-     *     targetEntity="ConsumptionCategory",
-     *     inversedBy="consumption"
-     * )
-     * @ORM\JoinColumn(
-     *     name="category_id",
-     *     referencedColumnName="id",
-     *     nullable=false
-     * )
-     */
-    private $category;
-
-    /**
      * Consumption constructor.
      */
     public function __construct()
     {
         $this->created= new \DateTime();
         $this->updated= new \DateTime();
+        $this->category = new ArrayCollection();
+    }
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param $category
+     * @return $this
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
     }
 
     /**
@@ -155,4 +171,5 @@ class Consumption
     {
         $this->updated= new \DateTime();
     }
+
 }

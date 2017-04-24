@@ -1,0 +1,63 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Consumptions list</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a href="{{ path('admin_consumption_new') }}">
+                                <button type="submit" class="btn btn-sm btn-round btn-primary">New consumption </button>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table class="table table-striped jambo_table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Created by user</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for consumption in pagination %}
+                                <tr>
+                                    <td>{{ consumption.id }}</td>
+                                    <td>{{ consumption.name }}</td>
+                                    <td>{% if consumption.isuser %}Yes{% else %}No{% endif %}</td>
+                                    <td>{% if consumption.created %}{{ consumption.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if consumption.updated %}{{ consumption.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>
+                                        <a href="{{ path('admin_consumption_edit', { 'id': consumption.id }) }}">
+                                            <button type="button" class="btn btn-round btn-info btn-sm">Edit</button>
+                                        </a>
+                                        <a href="{{ path('admin_consumption_delete', { 'id': consumption.id }) }}">
+                                            <button type="submit" class="btn btn-round btn-danger btn-sm"><span
+                                                        class="glyphicon glyphicon-trash"
+                                                        aria-hidden="true"></span></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="navigation">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

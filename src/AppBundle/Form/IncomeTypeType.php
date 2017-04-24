@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ConsumptionCategoryType extends AbstractType
+class IncomeTypeType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -23,8 +23,7 @@ class ConsumptionCategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ConsumptionCategory',
-            'allow_extra_fields' => true,
+            'data_class' => 'AppBundle\Entity\IncomeType'
         ));
     }
 
@@ -33,7 +32,7 @@ class ConsumptionCategoryType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_consumptioncategory';
+        return 'appbundle_incometype';
     }
 
 

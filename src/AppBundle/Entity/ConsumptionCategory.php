@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -34,6 +35,17 @@ class ConsumptionCategory
     private $is_user = 0;
 
     /**
+     * @ORM\ManyToOne(targetEntity="ConsumptionCategory", inversedBy="child_categories")
+     * @ORM\JoinColumn(name="parent_category_id", referencedColumnName="id")
+     */
+    protected $parent_category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ConsumptionCategory", mappedBy="parent_category")
+     */
+    protected $child_categories;
+
+    /**
      * @var \DateTime $created
      *
      * @ORM\Column(type="datetime")
@@ -48,10 +60,7 @@ class ConsumptionCategory
     private $updated;
 
     /**
-     * @ORM\OneToMany(
-     *     targetEntity="Consumption",
-     *     mappedBy="category"
-     * )
+     * @ORM\OneToMany(targetEntity="Consumption", mappedBy="category")
      */
     private $consumption;
 
@@ -62,6 +71,12 @@ class ConsumptionCategory
     {
         $this->created= new \DateTime();
         $this->updated= new \DateTime();
+        $this->child_categories = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -69,7 +84,7 @@ class ConsumptionCategory
      */
     public function getId()
     {
-        return $this->id;
+        return (int)$this->id;
     }
 
     /**
@@ -150,5 +165,55 @@ class ConsumptionCategory
     public function preUpdate()
     {
         $this->updated= new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConsumption()
+    {
+        return $this->consumption;
+    }
+
+    /**
+     * @param $consumption
+     * @return $this
+     */
+    public function setConsumption($consumption)
+    {
+        $this->consumption = $consumption;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParentCategory()
+    {
+        return $this->parent_category;
+    }
+
+    /**
+     * @param mixed $parent_category
+     */
+    public function setParentCategory($parent_category)
+    {
+        $this->parent_category = $parent_category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChildCategories()
+    {
+        return $this->child_categories;
+    }
+
+    /**
+     * @param mixed $child_categories
+     */
+    public function setChildCategories($child_categories)
+    {
+        $this->child_categories = $child_categories;
     }
 }

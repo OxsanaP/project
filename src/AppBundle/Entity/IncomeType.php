@@ -29,7 +29,7 @@ class IncomeType
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_user;
+    private $is_user = 0;
 
     /**
      * @var \DateTime $created
